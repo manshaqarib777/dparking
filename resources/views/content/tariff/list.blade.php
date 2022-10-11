@@ -13,17 +13,29 @@
 
                 <div class="card-body">
                     <div class="table-responsive">
-
                         <table class="table table-borderd table-condenced w-100" id="tariffDatatable">
+                            <thead>
+                                <tr>
+                                    <th>{{__('application.table.serial')}}</th>
+                                    <th>{{__('application.tariff.place')}}</th>
+                                    <th>{{__('application.tariff.name')}}</th>
+                                    <th>{{__('application.tariff.type')}}</th>
+                                    <th>{{__('application.tariff.start_date')}}</th>
+                                    <th>{{__('application.tariff.end_date')}}</th>
+                                    <th>{{__('application.tariff.min_amount')}}</th>
+                                    <th>{{__('application.tariff.amount')}}</th>
+                                    <th>{{__('application.tariff.status')}}</th>
+                                    <th>{{__('application.table.option')}}</th>
+                                </tr>
+                            </thead>
                         </table>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
 </div> 
 
-<script src="{{ asset('js/custom/settings/tariff.js') }}"></script>
+<script src="{{ assetz('js/custom/settings/tariff.js') }}"></script>
 
 @endsection

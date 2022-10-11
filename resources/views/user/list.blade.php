@@ -13,7 +13,16 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="userDataTable" class="table table-borderd table-condenced w-100">
-
+                                <thead>
+                                    <tr>
+                                        <th>{{__('application.table.serial')}}</th>
+                                        <th>{{__('application.user.name')}}</th>
+                                        <th>{{__('application.user.email_address')}}</th>
+                                        <th>{{__('application.user.role')}}</th>
+                                        <th>{{__('application.user.status')}}</th>
+                                        <th>{{__('application.table.option')}}</th>
+                                    </tr>
+                                </thead>
                             </table>
                         </div>
                     </div>
@@ -24,5 +33,5 @@
 
 @endsection
 @push('scripts')
-    <script type="text/javascript" src="{{ asset('js/user.js') }}"></script>
+    <script type="text/javascript" src="{{ assetz('js/user.js') }}"></script>
 @endpush

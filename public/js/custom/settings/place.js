@@ -12,7 +12,6 @@
             buttons: [],
             columns: [
                 {
-                    title: "#SL",
                     data: "id",
                     class: "no-sort",
                     width: "50px",
@@ -21,10 +20,10 @@
                         return col.row + 1 + pageInfo.start;
                     },
                 },
-                { title: "Name", name: "name", data: "name" },
-                { title: "Description", name: "description", data: "description" },
+                { name: "db_id", data: "id" },
+                { name: "name", data: "name" },
+                { name: "description", data: "description" },
                 {
-                    title: "Status",
                     name: "status",
                     data: "status",
                     render: function (data, type, row) {
@@ -32,7 +31,6 @@
                     },
                 },
                 {
-                    title: "Option",
                     data: "id",
                     class: "text-end width-5-per",
                     render: function (data, type, row, col) {
@@ -79,7 +77,7 @@
                 {
                     searchable: false,
                     orderable: false,
-                    targets: [0, 3, 4],
+                    targets: [0, 1, 3, 4, 5],
                 },
             ],
             responsive: true,

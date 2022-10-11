@@ -70,6 +70,7 @@
                             <div class="col-md-5">
                                 <div class="row">
                                     <div class="col-12">
+                                        @if(auth()->user()->hasRole('admin'))
                                         <div class="form-group mb-1">
                                             <label for="place_id"
                                                 class="col-md-4 col-form-label col-form-label text-md-right"><span
@@ -91,6 +92,9 @@
                                             </span>
                                             @endif
                                         </div>
+                                        @else
+                                        <input type="hidden" id="place_id" name="place_id" value="{{auth()->user()->place_id}}">
+                                        @endif
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group mb-1">
@@ -214,5 +218,5 @@
     var id = {{ $parking->id }}
     var categories = @json($categories);
 </script>
-<script src="{{ asset('js/custom/settings/parking.js') }}"></script>
+<script src="{{ assetz('js/custom/settings/parking.js') }}"></script>
 @endpush

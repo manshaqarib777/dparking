@@ -12,7 +12,6 @@
             buttons: [],
             columns: [
                 {
-                    title: "#SL",
                     data: "id",
                     class: "no-sort",
                     width: "50px",
@@ -21,9 +20,10 @@
                         return col.row + 1 + pageInfo.start;
                     },
                 },
-                { title: "Place", name: "places.name", data: "place.name" },
-                { title: "Name", name: "name", data: "name" },
-                { title: "Level", name: "level", data: "level" },
+                { name: "db_id", data: "id" },
+                { name: "places.name", data: "place.name" },
+                { name: "name", data: "name" },
+                { name: "level", data: "level" },
                 { title: "Remarks", name: "remarks", data: "remarks" },
                 {
                     title: "Status",
@@ -81,7 +81,7 @@
                 {
                     searchable: false,
                     orderable: false,
-                    targets: [0, 1, 4, 5, 6],
+                    targets: [0, 1, 2, 5, 6, 7],
                 },
             ],
             responsive: true,

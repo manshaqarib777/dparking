@@ -60,6 +60,19 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-borderd table-condenced w-100 f12" id="parkingDatatable">
+                                <thead>
+                                    <tr>
+                                        <th>{{__('application.table.serial')}}</th>
+                                        <th>{{__('application.parking.barcode')}}</th>
+                                        <th>{{__('application.parking.vehicle_no')}}</th>
+                                        <th>{{__('application.parking.type')}}</th>
+                                        <th>{{__('application.parking.in_time')}}</th>
+                                        <th>{{__('application.parking.out_time')}}</th>
+                                        <th>{{__('application.parking.payable_amount')}}</th>
+                                        <th>{{__('application.parking.parking_slot')}}</th>
+                                        <th>{{__('application.table.option')}}</th>
+                                    </tr>
+                                </thead>
                             </table>
                         </div>
                     </div>
@@ -70,5 +83,5 @@
 
 @endsection
 @push('scripts')
-    <script src="{{ asset('js/custom/settings/parking.js') }}"></script>
+    <script src="{{ assetz('js/custom/settings/parking.js') }}"></script>
 @endpush

@@ -30,8 +30,8 @@
     <link rel="stylesheet" href="{{ asset('assets/vendors/datepicker/jquery.datetimepicker.min.css') }}" />
 
     <!-- Layout styles -->
-    <link rel="stylesheet" href="{{ asset('assets/css/main/style.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/site.css') }}" />
+    <link rel="stylesheet" href="{{ assetz('assets/css/main/style.css') }}" />
+    <link rel="stylesheet" href="{{ assetz('css/site.css') }}" />
 
     <!--  select 2  -->
     <link rel="stylesheet" href="{{ asset('assets/css/select2.min.css') }}" />
@@ -181,6 +181,18 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('parking_settings.index') }}">{{
                                     __('application.menu.slot_list') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('parking_settings.rfid_vehicles.create') }}">{{
+                                    __('application.menu.add_rfid_vehicles') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('parking_settings.rfid_vehicles.index') }}">{{
+                                    __('application.menu.rfid_vehicles_list') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('parking_settings.rfid_vehicles.endpoint') }}">{{
+                                    __('application.menu.rfid_endpoint') }}</a>
                             </li>
                         </ul>
                     </div>
@@ -425,7 +437,7 @@
         <link rel="stylesheet" href="{{ asset('assets/vendors/sweet-alert2/sweetalert2.min.css') }}" />
 
         <!-- Plugin js for this page -->
-        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ assetz('js/app.js') }}"></script>
         <script type="text/javascript">
             Ziggy.url = "{{ url('/') }}";
                 @if ($_SERVER['SERVER_PORT'] != 80 || $_SERVER['SERVER_PORT'] != 443)
@@ -444,7 +456,7 @@
         <script src="{{ asset('assets/js/todolist.js') }}"></script>
         <script src="{{ asset('assets/vendors/datepicker/jquery.datetimepicker.full.min.js') }}"></script>
         <script src="{{ asset('assets/vendors/sweet-alert2/sweetalert2.all.min.js') }}"></script>
-        <script src="{{ asset('js/site.js') }}"></script>
+        <script src="{{ assetz('js/site.js') }}"></script>
         @stack('scripts')
         <!-- endinject -->
         <!-- End custom js for this page -->
@@ -473,8 +485,8 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
-    <link href="{{ asset('css/public_site.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ assetz('assets/css/style.css') }}" />
+    <link href="{{ assetz('css/public_site.css') }}" rel="stylesheet">
 </head>
 
 <body>

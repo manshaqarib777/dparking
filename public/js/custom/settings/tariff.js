@@ -16,7 +16,6 @@
             buttons: [],
             columns: [
                 {
-                    title: "#SL",
                     data: "id",
                     class: "no-sort",
                     width: "50px",
@@ -25,15 +24,14 @@
                         return col.row + 1 + pageInfo.start;
                     },
                 },
-                { title: "Place", name: "place.name", data: "place.name" },
-                { title: "Name", name: "name", data: "name" },
-                { title: "Type", name: "category.type", data: "category.type" },
-                { title: "Start Date", name: "start_date", data: "start_date" },
-                { title: "End Date", name: "end_date", data: "end_date" },
-                { title: "Min Amount", name: "min_amount", data: "min_amount" },
-                { title: "Per Hour", name: "amount", data: "amount" },
+                { name: "place.name", data: "place.name" },
+                { name: "name", data: "name" },
+                { name: "category.type", data: "category.type" },
+                { name: "start_date", data: "start_date" },
+                { name: "end_date", data: "end_date" },
+                { name: "min_amount", data: "min_amount" },
+                { name: "amount", data: "amount" },
                 {
-                    title: "Status",
                     name: "status",
                     data: "status",
                     render: function (data, type, row) {
@@ -41,7 +39,6 @@
                     },
                 },
                 {
-                    title: "Option",
                     data: "id",
                     class: "text-end width-5-per",
                     render: function (data, type, row, col) {

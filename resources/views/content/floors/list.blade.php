@@ -13,7 +13,18 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="floorDatatable" class="table table-borderd table-condenced w-100">
-
+                            <thead>
+                                <tr>
+                                    <th>{{__('application.table.serial')}}</th>
+                                    <th>{{__('application.floor.db_id')}}</th>
+                                    <th>{{__('application.floor.place')}}</th>
+                                    <th>{{__('application.floor.name')}}</th>
+                                    <th>{{__('application.floor.floor_level')}}</th>
+                                    <th>{{__('application.floor.remarks')}}</th>
+                                    <th>{{__('application.floor.status')}}</th>
+                                    <th>{{__('application.table.option')}}</th>
+                                </tr>
+                            </thead>
                         </table>
                     </div>
                 </div>
@@ -24,5 +35,5 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('js/custom/settings/floor.js') }}"></script>
+<script src="{{ assetz('js/custom/settings/floor.js') }}"></script>
 @endpush

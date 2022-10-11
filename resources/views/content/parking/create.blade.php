@@ -46,10 +46,10 @@
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <input type="text" name="barcode" id="barcode" class="form-control" tabindex="1"
-                                    placeholder="Barcode" autocomplete="off">
+                                    placeholder="{{__('application.parking.barcode')}}" autocomplete="off">
                             </div>
                             <div class="col-md-12">
-                                <input value="Find" class="btn btn-sm btn-outline-info pull-right mt-2" type="submit">
+                                <input value="{{__('application.parking.find')}}" class="btn btn-sm btn-outline-info pull-right mt-2" type="submit">                                
                             </div>
                         </div>
                     </form>
@@ -57,7 +57,7 @@
             </div>
         </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mb-2">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">{{ __('application.parking.add_parking') }}</div>
@@ -69,6 +69,7 @@
                             <div class="col-md-5">
                                 <div class="row">
                                     <div class="col-12">
+                                        @if(auth()->user()->hasRole('admin'))
                                         <div class="form-group mb-1">
                                             <label for="place_id"
                                                 class="col-md-4 col-form-label col-form-label text-md-right"><span
@@ -90,6 +91,9 @@
                                             </span>
                                             @endif
                                         </div>
+                                        @else
+                                        <input type="hidden" id="place_id" name="place_id" value="{{auth()->user()->place_id}}">
+                                        @endif
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group mb-1">
@@ -193,7 +197,7 @@
         </div>
     </div>
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mb-5">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">{{ __('application.parking.all_parking_list') }}</div>
@@ -201,6 +205,19 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-borderd table-condenced w-100 f12" id="parkingDatatable">
+                            <thead>
+                                <tr>
+                                    <th>{{__('application.table.serial')}}</th>
+                                    <th>{{__('application.parking.barcode')}}</th>
+                                    <th>{{__('application.parking.vehicle_no')}}</th>
+                                    <th>{{__('application.parking.type')}}</th>
+                                    <th>{{__('application.parking.in_time')}}</th>
+                                    <th>{{__('application.parking.out_time')}}</th>
+                                    <th>{{__('application.parking.payable_amount')}}</th>
+                                    <th>{{__('application.parking.parking_slot')}}</th>
+                                    <th>{{__('application.table.option')}}</th>
+                                </tr>
+                            </thead>
                         </table>
                     </div>
 
@@ -215,5 +232,5 @@
 <script>
     var categories = @json($categories);
 </script>
-<script src="{{ asset('js/custom/settings/parking.js') }}"></script>
+<script src="{{ assetz('js/custom/settings/parking.js') }}"></script>
 @endpush

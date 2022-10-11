@@ -11,7 +11,10 @@
 .select2 {
     height: 35px !important;
     color: #32325c;
-    padding: 10px;
+}
+
+.select2-container--bootstrap-5 .select2-selection{
+    border: 1px solid #e4e9f0
 }
 
 select.form-control,

@@ -168,5 +168,5 @@
 	var lineChartLabel = @json($data['lineChart']['labels']);
 	var lineChartData = @json($data['lineChart']['data']);
 </script>
-<script src="{{ asset('js/custom/dashboard/home.js') }}"></script>
+<script src="{{ assetz('js/custom/dashboard/home.js') }}"></script>
 @endpush

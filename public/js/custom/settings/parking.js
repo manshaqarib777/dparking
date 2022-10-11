@@ -37,13 +37,13 @@
 
             columns: [
                 {
-                    'title': '#SL', data: 'id', class: "no-sort", width: '50px', render: function (data, row, type, col) {
+                    data: 'id', class: "no-sort", width: '50px', render: function (data, row, type, col) {
                         var pageInfo = parkingDatatableEl.page.info();
                         return (col.row + 1) + pageInfo.start;
                     }
                 },
                 {
-                    'title': 'Barcode', name: 'barcode', data: "barcode", render: function (data, type, row) {
+                    name: 'barcode', data: "barcode", render: function (data, type, row) {
                         if (row.out_time == null) {
                             return '<a href="' + route('parking.barcode', { 'parking': row.id }) + '" class="font-weight-bold text-info">' + data + '</a>';
                         }
@@ -53,29 +53,29 @@
                     }
                 },
                 {
-                    'title': 'Vehicle No', name: 'vehicle_no', data: "vehicle_no"
+                    name: 'vehicle_no', data: "vehicle_no"
                 },
                 {
-                    'title': 'Type', name: 'category', data: "category", render: function (data, type, row) {
+                    name: 'category', data: "category", render: function (data, type, row) {
                         return data.type;
                     }
                 },
                 {
-                    'title': 'In Time', name: 'in_time', data: "in_time"
+                    name: 'in_time', data: "in_time"
                 },
                 {
-                    'title': 'Out Time', name: 'out_time', data: "out_time"
+                    name: 'out_time', data: "out_time"
                 },
                 {
-                    'title': 'Amount', name: 'amount', data: "amount"
+                    name: 'amount', data: "amount"
                 },
                 {
-                    'title': 'Slot', name: 'slot.slot_name', data: "slot.slot_name", render: function (data, type, row) {
+                    name: 'slot.slot_name', data: "slot.slot_name", render: function (data, type, row) {
                         return typeof data != 'undefined' ? data : '';
                     }
                 },
                 {
-                    'title': 'Option', data: 'id', class: 'text-end width-5-per', render: function (data, type, row, col) {
+                    data: 'id', class: 'text-end width-5-per', render: function (data, type, row, col) {
                         let deleteUrl = route('parking.destroy', data);
                         let $returnData = '';
                         if (row.out_time == null) {
@@ -123,13 +123,13 @@
 
             columns: [
                 {
-                    'title': '#SL', data: 'id', class: "no-sort", width: '50px', render: function (data, row, type, col) {
+                    data: 'id', class: "no-sort", width: '50px', render: function (data, row, type, col) {
                         var pageInfo = parkingDatatableCurrent.page.info();
                         return (col.row + 1) + pageInfo.start;
                     }
                 },
                 {
-                    'title': 'Barcode', name: 'barcode', data: "barcode", render: function (data, type, row) {
+                    name: 'barcode', data: "barcode", render: function (data, type, row) {
                         if (row.out_time == null) {
                             return '<a href="' + route('parking.barcode', { 'parking': row.id }) + '" class="font-weight-bold text-info">' + data + '</a>';
                         }
@@ -139,23 +139,23 @@
                     }
                 },
                 {
-                    'title': 'Vehicle No', name: 'vehicle_no', data: "vehicle_no"
+                    name: 'vehicle_no', data: "vehicle_no"
                 },
                 {
-                    'title': 'Type', name: 'category', data: "category", render: function (data, type, row) {
+                    name: 'category', data: "category", render: function (data, type, row) {
                         return data.type;
                     }
                 },
                 {
-                    'title': 'In Time', name: 'in_time', data: "in_time"
+                    name: 'in_time', data: "in_time"
                 },
                 {
-                    'title': 'Slot', name: 'slot.slot_name', data: "slot.slot_name", render: function (data, type, row) {
+                    name: 'slot.slot_name', data: "slot.slot_name", render: function (data, type, row) {
                         return typeof data != 'undefined' ? data : '';
                     }
                 },
                 {
-                    'title': 'Option', data: 'id', class: 'text-end width-5-per', render: function (data, type, row, col) {
+                    data: 'id', class: 'text-end width-5-per', render: function (data, type, row, col) {
                         let deleteUrl = route('parking.destroy', data);
                         return '<a href="' + route('parking.barcode', data) + '"><i class="fa fa-barcode text-info" aria-hidden="true" title="Print Barcode"></i></a> | ' +
                             '<a href="' + route('parking.end', data) + '"><i class="fa fa-car text-success" aria-hidden="true" title="End Parking"></i></a> | ' +
@@ -198,13 +198,13 @@
 
             columns: [
                 {
-                    'title': '#SL', data: 'id', class: "no-sort", width: '50px', render: function (data, row, type, col) {
+                    data: 'id', class: "no-sort", width: '50px', render: function (data, row, type, col) {
                         var pageInfo = parkingDatatableEnded.page.info();
                         return (col.row + 1) + pageInfo.start;
                     }
                 },
                 {
-                    'title': 'Barcode', name: 'barcode', data: "barcode", render: function (data, type, row) {
+                    name: 'barcode', data: "barcode", render: function (data, type, row) {
                         if (row.out_time == null) {
                             return '<a href="' + route('parking.barcode', { 'parking': row.id }) + '" class="font-weight-bold text-info">' + data + '</a>';
                         }
@@ -214,29 +214,29 @@
                     }
                 },
                 {
-                    'title': 'Vehicle No', name: 'vehicle_no', data: "vehicle_no"
+                    name: 'vehicle_no', data: "vehicle_no"
                 },
                 {
-                    'title': 'Type', name: 'category', data: "category", render: function (data, type, row) {
+                    name: 'category', data: "category", render: function (data, type, row) {
                         return data.type;
                     }
                 },
                 {
-                    'title': 'In Time', name: 'in_time', data: "in_time"
+                    name: 'in_time', data: "in_time"
                 },
                 {
-                    'title': 'Out Time', name: 'out_time', data: "out_time"
+                    name: 'out_time', data: "out_time"
                 },
                 {
-                    'title': 'Amount', name: 'amount', data: "amount"
+                    name: 'amount', data: "amount"
                 },
                 {
-                    'title': 'Slot', name: 'slot.slot_name', data: "slot.slot_name", render: function (data, type, row) {
+                    name: 'slot.slot_name', data: "slot.slot_name", render: function (data, type, row) {
                         return typeof data != 'undefined' ? data : '';
                     }
                 },
                 {
-                    'title': 'Option', data: 'id', class: 'text-end width-5-per', render: function (data, type, row, col) {
+                    data: 'id', class: 'text-end width-5-per', render: function (data, type, row, col) {
                         let deleteUrl = route('parking.destroy', data);
                         return '<button class="btn btn-link p-0" onclick="deleteData(\'' + deleteUrl + '\', \'#parkingDatatableEnded\')"><i class="fs-6 fa fa-trash-o text-danger" aria-hidden="true" title="Delete Parking"></i></button>';
                     }
@@ -280,6 +280,42 @@
         $(document).find('#category_id').html(html);
 
         $('#category_id').trigger('change');
+    });
+
+    $(document).on('click', '#frm-rfid', function(){
+        if($('input[name=slot_id]:checked').length == 0){
+            new swal("Error","Please select a slot","error");
+            return false;
+        }
+
+        axios.get(route('parking_settings.rfid.scan')).then(res => {
+            if(res.data.status == -1){
+                new swal("Error","Please set RFID Device","error");
+            }else if(res.data.status == 0){
+                new swal("Error","No item found!","error");
+            }else if(res.data.status == 1){
+                $('#vehicle_no').val(res.data.entry.rfid_no);
+            }else{
+                new swal("Error","Some thing went wrong!","error");
+            }
+        })
+
+    });
+
+    $(document).on('click', '#rfid-checkout', function(){       
+
+        axios.get(route('parking_settings.rfid.checkout')).then(res => {
+            if(res.data.status == -1){
+                new swal("Error","Please set RFID Device","error");
+            }else if(res.data.status == 0){
+                new swal("Error","No item found!","error");
+            }else if(res.data.status == 1){
+                window.open(route('parking.end', res.data.entry.parking_id),"_self");
+            }else{
+                new swal("Error","Some thing went wrong!","error");
+            }
+        })
+
     });
 
 })(jQuery);

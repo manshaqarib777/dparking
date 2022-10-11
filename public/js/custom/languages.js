@@ -13,7 +13,6 @@
             buttons: [],
             columns: [
                 {
-                    title: "#SL",
                     data: "id",
                     class: "no-sort",
                     width: "50px",
@@ -23,7 +22,6 @@
                     },
                 },
                 {
-                    title: "Country Name",
                     name: "name",
                     data: "country",
                     render: function (data, type, row, col) {
@@ -31,13 +29,11 @@
                     }
                 },
                 {
-                    title: "Language Name",
                     name: "name",
                     data: "name",
                 },
-                { title: "Language Code", name: "code", data: "code" },
+                { name: "code", data: "code" },
                 {
-                    title: "Flag",
                     data: "country",
                     name: "country",
                     render: function (data, type, row, col) {
@@ -45,7 +41,6 @@
                     }
                 },
                 {
-                    title: "Status",
                     data: "status",
                     name: "status",
                     render: function (data, type, row, col) {
@@ -61,7 +56,6 @@
                     }
                 },
                 {
-                    title: "Option",
                     data: "id",
                     class: "text-end width-5-per",
                     render: function (data, type, row, col) {

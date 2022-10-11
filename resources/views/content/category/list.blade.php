@@ -13,7 +13,16 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-borderd table-condenced w-100" id="categoryDatatable">
-
+                                <thead>
+                                    <tr>
+                                        <th>{{__('application.table.serial')}}</th>
+                                        <th>{{__('application.category.place')}}</th>
+                                        <th>{{__('application.category.type')}}</th>
+                                        <th>{{__('application.category.description')}}</th>
+                                        <th>{{__('application.category.status')}}</th>
+                                        <th>{{__('application.table.option')}}</th>
+                                    </tr>
+                                </thead>
                             </table>
                         </div>
                     </div>
@@ -23,5 +32,5 @@
     </div>
 @endsection
 @push('scripts')
-    <script src="{{ asset('js/custom/settings/category.js') }}"></script>
+    <script src="{{ assetz('js/custom/settings/category.js') }}"></script>
 @endpush

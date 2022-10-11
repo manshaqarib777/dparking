@@ -13,7 +13,6 @@
             buttons: [],
             columns: [
                 {
-                    title: "#SL",
                     data: "id",
                     class: "no-sort",
                     width: "50px",
@@ -22,9 +21,9 @@
                         return col.row + 1 + pageInfo.start;
                     },
                 },
-                { title: "Place", name: "place.name", data: "place.name" },
-                { title: "Type", name: "type", data: "type" },
-                { title: "Description", name: "description", data: "description" },
+                { name: "place.name", data: "place.name" },
+                { name: "type", data: "type" },
+                { name: "description", data: "description" },
                 {
                     title: "Status",
                     name: "status",
@@ -33,8 +32,7 @@
                         return data == 1 ? "Enable" : "Disable";
                     },
                 },
-                {
-                    title: "Option",
+                {                    
                     data: "id",
                     class: "text-end width-5-per",
                     render: function (data, type, row, col) {

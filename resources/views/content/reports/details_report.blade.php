@@ -191,6 +191,6 @@
     var floors = @json($floors);
     var categories = @json($categories);
 </script>
-<script src="{{ asset('js/custom/reports.js') }}"></script>
+<script src="{{ assetz('js/custom/reports.js') }}"></script>
 
 @endpush

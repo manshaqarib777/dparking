@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Parking;
 use App\Models\Category;
 use App\Models\Tariff;
+use App\Models\RfidVehicle;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreParkingRequest;
 use App\Http\Requests\UpdateParkingRequest;
@@ -290,11 +291,12 @@ class ParkingController extends Controller
 		$validated = $request->validated();
 
 		try {
-
+			$rfidVehicle = RfidVehicle::where('vehicle_no',$validated['vehicle_no'])->where('category_id',$validated['category_id'])->first();
 			$parking = Parking::create([
 				'place_id'    	=> auth()->user()->hasRole('admin') ? $validated['place_id'] : auth()->user()->place_id,
 				'slot_id'    	=> $validated['slot_id'],
 				'vehicle_no'    => $validated['vehicle_no'],
+				'rfid_no'		=> (($rfidVehicle) ? $rfidVehicle->rfid_no : null),
 				'category_id'   => $validated['category_id'],
 				'driver_name'   => $validated['driver_name'],
 				'driver_mobile' => $validated['driver_mobile'],
@@ -303,6 +305,7 @@ class ParkingController extends Controller
 				'created_by'    => $request->user()->id,
 				'modified_by'   => $request->user()->id
 			]);
+			
 		} catch (\PDOException $e) {
 
 			return redirect()
@@ -379,11 +382,12 @@ class ParkingController extends Controller
 					->back()
 					->withInput()
 					->with(['flashMsg' => ['msg' => "You are not allow to update parking.", 'type' => 'warning']]);
+			$rfidVehicle = RfidVehicle::where('vehicle_no',$validated['vehicle_no'])->where('category_id',$validated['category_id'])->first();
 			$parking = Parking::where('id', $parking_crud->id)->update([
-
 				'place_id'    	=> auth()->user()->hasRole('admin') ? $validated['place_id'] : auth()->user()->place_id,
 				'slot_id'    	=> $validated['slot_id'],
 				'vehicle_no'    => $validated['vehicle_no'],
+				'rfid_no'		=> (($rfidVehicle) ? $rfidVehicle->rfid_no : null),
 				'category_id'   => $validated['category_id'],
 				'driver_name'   => $validated['driver_name'],
 				'driver_mobile' => $validated['driver_mobile'],
@@ -511,7 +515,6 @@ class ParkingController extends Controller
 
 				$parking->amount = $amt;
 				$parking->modified_by = $request->user()->id;
-				$parking->update();
 				$parking->paid = $validated['paid_amt'];
 				$parking->status = 4;
 				$parking->update();

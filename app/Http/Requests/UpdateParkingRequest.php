@@ -24,17 +24,19 @@ class UpdateParkingRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'slot_id'       => 'bail|required',
+        $rules =  [
             'vehicle_no'    => 'bail|required|string',
             'category_id'   => 'bail|required|integer',
-            'driver_name'   => 'bail|nullable|string',
+            'slot_id'       => 'bail|required|integer',
             'driver_mobile' => 'bail|nullable|string',
+            'driver_name'   => 'bail|nullable|string',
         ];
 
         if(auth()->user()->hasRole('admin')){
 			$rules['place_id'] = 'required';
 		}
+
+        return $rules;
     }
 
     public function withValidator($validator){        

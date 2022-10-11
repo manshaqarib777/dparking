@@ -23,7 +23,6 @@
                     data: "id",
                     name: "sl",
                     class: "no-sort",
-                    title: "#SL",
                     render: function (data, type, row, ind) {
                         var pageInfo = userDataTable.page.info();
                         return ind.row + 1 + pageInfo.start;
@@ -32,7 +31,6 @@
                 {
                     data: "name",
                     name: "name",
-                    title: "Name",
                     render: function (data, type, row, index) {
                         return data;
                     },
@@ -40,7 +38,6 @@
                 {
                     data: "email",
                     name: "email",
-                    title: "Email",
                     render: function (data, type, row, index) {
                         return data;
                     },
@@ -48,7 +45,6 @@
                 {
                     data: "roles",
                     name: "roles",
-                    title: "Roles",
                     render: function (data, type, row, index) {
                         var roleHTML = "";
                         for (let role of data) {
@@ -60,7 +56,6 @@
                 },
                 {
                     data: "status",
-                    title: "Status",
                     render: function (data, type, row) {
                         return data == 1 ? "Active" : "Deactive";
                     },
@@ -69,27 +64,32 @@
                     data: "id",
                     name: "id",
                     class: "text-end",
-                    title: "Action",
                     render: function (data, type, row, index) {
-                        var statusText;
-
-                        if (row.status) {
-                            statusText = "Deactivate the user";
+                        var $return = "";
+                        var editURL = route("user.edit", { user: data });
+                        var delURL = route("user.destroy", { user: data });
+                        var statusURL = route("user.status", {
+                            user: data,
+                        });
+                        if (row.status == 1) {
+                            $return =
+                                '<a href="' +
+                                statusURL +
+                                '"><i class="fa fa-window-close-o text-danger" aria-hidden="true" title="Deactivate"></i></a> | ';
                         } else {
-                            statusText = "Activate the user";
+                            $return =
+                                '<a href="' +
+                                statusURL +
+                                '"><i class="fa fa-check text-info" aria-hidden="true" title="Active"></i></a> | ';
                         }
+                        $return +=
+                            '<a href="' +
+                            editURL +
+                            '"><i class="fa fa-pencil-square-o text-info" aria-hidden="true" title="Edit Place"></i></a>';
 
-                        return (
-                            '<a href="' +
-                            route("user.status", { user: data }) +
-                            '" title="' +
-                            statusText +
-                            '">Change Status</a> | ' +
-                            '<a href="' +
-                            route("user.edit", { user: data }) +
-                            '">Edit</a> | ' +
-                            '<button class="btn btn-link p-0 text-danger" onclick="deleteData(\'' + route("user.destroy", { user: data }) +'\', \'#userDataTableSearch\')">Delete</button>'
-                        );
+                        $return += '| <button class="btn btn-link p-0" onclick="deleteData(\'' + delURL +'\', \'#placeDataTable\')"><i class="fs-6 fa fa-trash-o text-danger" aria-hidden="true" title="Delete Place"></i></button>';
+
+                        return $return;
                     },
                 },
             ],
@@ -110,7 +110,7 @@
                 {
                     searchable: false,
                     orderable: false,
-                    targets: [0, 3, 4, 5],
+                    targets: [0, 2, 3, 4, 5],
                 },
             ],
             responsive: true,

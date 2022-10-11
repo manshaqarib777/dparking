@@ -14,6 +14,7 @@ class Parking extends Model
 				'slot_id',
 				'category_id',
 				'vehicle_no',
+				'rfid_no',
 				'barcode',
 				'driver_name',
 				'driver_mobile',
@@ -55,5 +56,10 @@ class Parking extends Model
 	public function place()
 	{
 		return $this->belongsTo('App\Models\Place');
+	}
+
+	public function rfid_entry()
+	{
+		return $this->hasOne('App\Models\RfidDeviceEntry');
 	}
 }

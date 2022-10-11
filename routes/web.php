@@ -64,6 +64,15 @@ Route::middleware(['installed', 'auth', 'xss_clean', 'language'])->group(functio
         Route::get('languages/set-language/{language}', 'LanguageController@set_languages')->name('languages.set_languages');
     });
 
+    Route::get('parking/rfid-vehicles','RfidVehicleController@index')->name('parking_settings.rfid_vehicles.index');
+    Route::get('parking/rfid-vehicles/create','RfidVehicleController@create')->name('parking_settings.rfid_vehicles.create');
+    Route::post('parking/rfid-vehicles','RfidVehicleController@store')->name('parking_settings.rfid_vehicles.store');
+    Route::get('parking/rfid-vehicles/{rfidVehicle}/edit','RfidVehicleController@edit')->name('parking_settings.rfid_vehicles.edit');
+    Route::put('parking/rfid-vehicles/{rfidVehicle}/update','RfidVehicleController@update')->name('parking_settings.rfid_vehicles.update');
+    Route::get('parking/rfid-vehicles/change-status/{rfidVehicle}', 'RfidVehicleController@statusChange')->name('parking_settings.rfid_vehicles.status_changes');
+    Route::delete('parking/rfid-vehicles/{rfidVehicle}', 'RfidVehicleController@destroy')->name('parking_settings.rfid_vehicles.destroy');
+    Route::get('parking/rfid-vehicles/endpoint','RfidVehicleController@endpoint')->name('parking_settings.rfid_vehicles.endpoint');
+
     Route::middleware('roles:operator|admin')->group(function () {
 
         Route::resource('parking-crud', 'ParkingController', ['names' => 'parking'])->except(['show']);

@@ -61,5 +61,5 @@
         </div>
     </div>
 </div> 
-<script src="{{ asset('js/custom/content/barcode.js') }}"></script>
+<script src="{{ assetz('js/custom/content/barcode.js') }}"></script>
 @endsection

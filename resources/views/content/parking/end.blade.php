@@ -20,7 +20,7 @@
                                 <td class="w50">{{$parking->vehicle_no}}</td>                                
                             </tr>
                             <tr>
-                                <td class="w40">{{ __('application.parking.Type') }}</td>                                
+                                <td class="w40">{{ __('application.parking.type') }}</td>                                
                                 <td class="w10">:</td>                                
                                 <td class="w50">{{$parking->category->type}}</td>                                
                             </tr>
@@ -99,10 +99,10 @@
                         <form id="payForm" action="{{route('parking.pay',['parking' => $parking->id])}}" method="post">
                         @csrf
                             <tr>
-                                <td class="w40">{{ __('application.parking.recive_amount') }}</td>                                
+                                <td class="w40">{{ __('application.parking.receive_amount') }}</td>                                
                                 <td class="w10">:</td>                                
                                 <td class="w50">                                    
-                                    <input tabindex="1" type="number" id="recive_amt" step="any" placeholder="Recive Amount" class="form-control" required="">                                    
+                                    <input tabindex="1" type="number" id="recive_amt" step="any" placeholder="Receive Amount" class="form-control" required="">                                    
                                 </td>
                             </tr>
                             <tr>
@@ -147,7 +147,7 @@
         </div>
     </div>
 </div> 
-<script src="{{ asset('js/custom/content/end-parking.js') }}"></script>
+<script src="{{ assetz('js/custom/content/end-parking.js') }}"></script>
 <script>
    var paidAmount={{$parking->paid}};  
 </script>

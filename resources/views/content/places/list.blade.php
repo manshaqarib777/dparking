@@ -14,7 +14,16 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="placeDataTable" class="table table-borderd table-condenced w-100">
-
+                                <thead>
+                                    <tr>
+                                        <th>{{__('application.table.serial')}}</th>
+                                        <th>{{__('application.place.db_id')}}</th>
+                                        <th>{{__('application.place.name')}}</th>
+                                        <th>{{__('application.place.description')}}</th>
+                                        <th>{{__('application.place.status')}}</th>
+                                        <th>{{__('application.table.option')}}</th>
+                                    </tr>
+                                </thead>
                             </table>
                         </div>
                     </div>
@@ -25,5 +34,5 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/custom/settings/place.js') }}"></script>
+    <script src="{{ assetz('js/custom/settings/place.js') }}"></script>
 @endpush

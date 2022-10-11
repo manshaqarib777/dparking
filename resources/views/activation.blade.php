@@ -52,5 +52,5 @@
 </div>
 @endsection
 @push('scripts')
-    <script src="{{ asset('js/custom/activation.js') }}"></script>
+    <script src="{{ assetz('js/custom/activation.js') }}"></script>
 @endpush
