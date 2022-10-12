@@ -178,6 +178,8 @@ return [
         * Custom
         */
         Milon\Barcode\BarcodeServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
+
 
     ],
 

@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\API\V1;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Role;
+use Log;
 use App\User;
 use App\Models\Tariff;
 use App\Models\Parking;
 use App\Models\RfidVehicle;
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
 use App\Models\CategoryWiseFloorSlot;
-use Log;
 
 class RFIDController extends Controller
 {

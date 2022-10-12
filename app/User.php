@@ -8,10 +8,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable, MustVerifyEmailTrait, ModelCommonMethodTrait;
+    use Notifiable, MustVerifyEmailTrait, ModelCommonMethodTrait,HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -31,19 +32,19 @@ class User extends Authenticatable implements MustVerifyEmail
         'password', 'remember_token',
     ];
 
-    public function roles()
-    {
-        return $this->belongsToMany('App\Models\Role');
-    }
+    // public function roles()
+    // {
+    //     return $this->belongsToMany('App\Models\Role');
+    // }
 
-    public function hasRole($roles)
-    {
-        if (!is_array($roles)) {
-            $roles = [$roles];
-        }
+    // public function hasRole($roles)
+    // {
+    //     if (!is_array($roles)) {
+    //         $roles = [$roles];
+    //     }
 
-        return (bool) $this->roles()->whereIn('name', $roles)->first();
-    }
+    //     return (bool) $this->roles()->whereIn('name', $roles)->first();
+    // }
 
     /**
      * This function 

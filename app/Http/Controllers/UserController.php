@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Models\Role;
-use Illuminate\Http\Request;
-
-use App\Http\Requests\StoreUserInformation;
-use App\Models\Language;
-use App\Models\Place;
 use Exception;
+use App\Models\Place;
+
+use App\Models\Language;
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use App\Http\Requests\StoreUserInformation;
 use Illuminate\Support\Facades\{Hash, Mail};
 
 
