@@ -140,7 +140,7 @@
                                         name="password_confirmation">
                                 </div>
                             </div>
-                            @if (!auth()->user()->hasRole('admin'))
+                            @if (!auth()->user()->hasAllPermissions(allpermissions()))
                                 <div class="form-group row">
                                     <label for="currentPassword" class="col-md-3 col-form-label text-md-right">
                                         {{ __('Old Password') }} <span class="tcr i-req">*</span></label>

@@ -12,6 +12,15 @@ use App\Models\Place;
 
 class TariffController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:tariffs.index', ['only' => ['index']]);
+        $this->middleware('permission:tariffs.create', ['only' => ['create']]);
+        $this->middleware('permission:tariffs.store', ['only' => ['store']]);
+        $this->middleware('permission:tariffs.edit', ['only' => ['edit']]);
+        $this->middleware('permission:tariffs.update', ['only' => ['update']]);
+        $this->middleware('permission:tariffs.delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

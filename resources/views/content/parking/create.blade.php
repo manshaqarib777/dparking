@@ -69,7 +69,7 @@
                             <div class="col-md-5">
                                 <div class="row">
                                     <div class="col-12">
-                                        @if(auth()->user()->hasRole('admin'))
+                                        @if(auth()->user()->hasAllPermissions(allpermissions()))
                                         <div class="form-group mb-1">
                                             <label for="place_id"
                                                 class="col-md-4 col-form-label col-form-label text-md-right"><span

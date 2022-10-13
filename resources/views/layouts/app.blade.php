@@ -59,7 +59,7 @@
                         <span class="menu-title">{{ __('application.menu.dashboard') }}</span>
                     </a>
                 </li>
-                @if (Auth::user()->hasRole('admin'))
+                @if (Auth::user()->hasAllPermissions(allpermissions()))
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#ui-user-management" aria-expanded="false"
                         aria-controls="ui-user-management">
@@ -228,7 +228,7 @@
                     </div>
                 </li>
                 @endif
-                @if (Auth::user()->hasRole('admin'))
+                @if (Auth::user()->hasAllPermissions(allpermissions()))
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#ui-report" aria-expanded="false"
                         aria-controls="ui-report">

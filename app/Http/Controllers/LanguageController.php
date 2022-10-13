@@ -12,6 +12,16 @@ use Illuminate\Support\Facades\Validator;
 
 class LanguageController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:languages.index', ['only' => ['index']]);
+        $this->middleware('permission:languages.create', ['only' => ['create']]);
+        $this->middleware('permission:languages.store', ['only' => ['store']]);
+        $this->middleware('permission:languages.edit', ['only' => ['language_change']]);
+        $this->middleware('permission:languages.update', ['only' => ['update']]);
+        $this->middleware('permission:languages.delete', ['only' => ['destroy']]);
+        $this->middleware('permission:languages.config', ['only' => ['edit']]);
+    }
     /**
      * Display a listing of the resource.
      *

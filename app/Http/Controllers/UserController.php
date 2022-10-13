@@ -15,6 +15,16 @@ use Illuminate\Support\Facades\{Hash, Mail};
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:users.index', ['only' => ['index']]);
+        $this->middleware('permission:users.create', ['only' => ['create']]);
+        $this->middleware('permission:users.store', ['only' => ['store']]);
+        $this->middleware('permission:users.edit', ['only' => ['edit']]);
+        $this->middleware('permission:users.update', ['only' => ['update']]);
+        $this->middleware('permission:users.delete', ['only' => ['destroy']]);
+        $this->middleware('permission:users.status', ['only' => ['status']]);
+    }
     /**
      * Display a listing of the resource.
      *

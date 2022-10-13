@@ -11,6 +11,16 @@ use Log;
 
 class RfidVehicleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:rfids.index', ['only' => ['index']]);
+        $this->middleware('permission:rfids.create', ['only' => ['create']]);
+        $this->middleware('permission:rfids.store', ['only' => ['store']]);
+        $this->middleware('permission:rfids.edit', ['only' => ['edit']]);
+        $this->middleware('permission:rfids.update', ['only' => ['update']]);
+        $this->middleware('permission:rfids.delete', ['only' => ['destroy']]);
+        $this->middleware('permission:rfids.status', ['only' => ['statusChange']]);
+    }
     /**
      * Display a listing of the resource.
      *

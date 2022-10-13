@@ -59,7 +59,7 @@ class ParkingController extends Controller
 				$where = $request->input('where');
 			}
 
-			if (!auth()->user()->hasRole('admin')) {
+			if (!auth()->user()->hasAllPermissions(allpermissions())) {
 				$where['place_id and'] = auth()->user()->place_id;
 			}
 
@@ -67,7 +67,7 @@ class ParkingController extends Controller
 			return response()->json($parkings);
 		}
 
-		if (auth()->user()->hasRole('admin')) {
+		if (auth()->user()->hasAllPermissions(allpermissions())) {
 			$data['categories'] = Category::where('status', 1)->get();
 			$data['currently_parking'] = Parking::where('out_time', NULL)->count();
 			$data['total_slots'] = CategoryWiseFloorSlot::where('category_wise_floor_slots.status', 1)
@@ -136,7 +136,7 @@ class ParkingController extends Controller
 			}
 
 			$where['out_time'] = null;
-			if (!auth()->user()->hasRole('admin')) {
+			if (!auth()->user()->hasAllPermissions(allpermissions())) {
 				$where['place_id and'] = auth()->user()->place_id;
 			}
 
@@ -144,7 +144,7 @@ class ParkingController extends Controller
 			return response()->json($parkings);
 		}
 
-		if (auth()->user()->hasRole('admin')) {
+		if (auth()->user()->hasAllPermissions(allpermissions())) {
 			$data['categories'] = Category::where('status', 1)->get();
 			$data['currently_parking'] = Parking::where('out_time', NULL)->count();
 			$data['total_slots'] = CategoryWiseFloorSlot::where('category_wise_floor_slots.status', 1)
@@ -213,7 +213,7 @@ class ParkingController extends Controller
 			}
 
 			$where['out_time NOTEQ'] = null;
-			if (!auth()->user()->hasRole('admin')) {
+			if (!auth()->user()->hasAllPermissions(allpermissions())) {
 				$where['place_id and'] = auth()->user()->place_id;
 			}
 
@@ -221,7 +221,7 @@ class ParkingController extends Controller
 			return response()->json($parkings);
 		}
 
-		if (auth()->user()->hasRole('admin')) {
+		if (auth()->user()->hasAllPermissions(allpermissions())) {
 			$data['categories'] = Category::where('status', 1)->get();
 			$data['currently_parking'] = Parking::where('out_time', NULL)->count();
 			$data['total_slots'] = CategoryWiseFloorSlot::where('category_wise_floor_slots.status', 1)
@@ -254,7 +254,7 @@ class ParkingController extends Controller
 	 */
 	public function create()
 	{
-		if (auth()->user()->hasRole('admin')) {
+		if (auth()->user()->hasAllPermissions(allpermissions())) {
 			$data['places'] = Place::where('status', 1)->get();
 			$data['categories'] = Category::where('status', 1)->get();
 			$data['currently_parking'] = Parking::where('out_time', NULL)->count();
@@ -293,7 +293,7 @@ class ParkingController extends Controller
 		try {
 			$rfidVehicle = RfidVehicle::where('vehicle_no',$validated['vehicle_no'])->where('category_id',$validated['category_id'])->first();
 			$parking = Parking::create([
-				'place_id'    	=> auth()->user()->hasRole('admin') ? $validated['place_id'] : auth()->user()->place_id,
+				'place_id'    	=> auth()->user()->hasAllPermissions(allpermissions()) ? $validated['place_id'] : auth()->user()->place_id,
 				'slot_id'    	=> $validated['slot_id'],
 				'vehicle_no'    => $validated['vehicle_no'],
 				'rfid_no'		=> (($rfidVehicle) ? $rfidVehicle->rfid_no : null),
@@ -337,7 +337,7 @@ class ParkingController extends Controller
 	 */
 	public function edit(Parking $parking_crud)
 	{
-		if (auth()->user()->hasRole('admin')) {
+		if (auth()->user()->hasAllPermissions(allpermissions())) {
 			$data['places'] = Place::where('status', 1)->get();
 			$data['categories'] = Category::where('status', 1)->get();
 			$data['currently_parking'] = Parking::where('out_time', NULL)->count();
@@ -384,7 +384,7 @@ class ParkingController extends Controller
 					->with(['flashMsg' => ['msg' => "You are not allow to update parking.", 'type' => 'warning']]);
 			$rfidVehicle = RfidVehicle::where('vehicle_no',$validated['vehicle_no'])->where('category_id',$validated['category_id'])->first();
 			$parking = Parking::where('id', $parking_crud->id)->update([
-				'place_id'    	=> auth()->user()->hasRole('admin') ? $validated['place_id'] : auth()->user()->place_id,
+				'place_id'    	=> auth()->user()->hasAllPermissions(allpermissions()) ? $validated['place_id'] : auth()->user()->place_id,
 				'slot_id'    	=> $validated['slot_id'],
 				'vehicle_no'    => $validated['vehicle_no'],
 				'rfid_no'		=> (($rfidVehicle) ? $rfidVehicle->rfid_no : null),
@@ -441,6 +441,7 @@ class ParkingController extends Controller
 				}
 
 				$eDate = new \DateTime($parking->out_time);
+				dd($eDate);
 				Session::put('eDate_' . $parking->id, $eDate);
 				$dateDiff = $eDate->diff(new \DateTime($parking->in_time));
 
@@ -572,7 +573,7 @@ class ParkingController extends Controller
 	public function quick_end(Request $request)
 	{
 		try {
-			if (auth()->user()->hasRole('admin')) {
+			if (auth()->user()->hasAllPermissions(allpermissions())) {
 				$parking = Parking::where([
 					['barcode', $request->input('barcode')],
 					['status', '<=', 2],

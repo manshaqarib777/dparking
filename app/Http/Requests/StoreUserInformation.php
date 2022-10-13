@@ -67,7 +67,7 @@ class StoreUserInformation extends FormRequest
             } elseif (
                 $this::user()
                 && Route::currentRouteName() !== 'user.store'
-                && !$this::user()->hasRole('admin')
+                && !$this::user()->hasAllPermissions(allpermissions())
                 && !Hash::check($validator->getData()['currentPassword'], $this::user()->makeVisible('password')->password)
             ) {
                 $validator->errors()->add('currentPassword', 'Current Password is not matched.');

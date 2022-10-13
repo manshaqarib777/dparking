@@ -2,6 +2,9 @@
 /**
  * overWrite the Env File values.
  */
+
+use Spatie\Permission\Models\Permission;
+
 if (!function_exists('setEnv')) {
 	function setEnv($key, $value)
 	{
@@ -41,6 +44,12 @@ if (!function_exists('assetz')) {
     {
         $version = (($version == "") ? '?v=' . env('PJVER',2.1) : $version);
         return asset($src . $version);
+    }
+}
+if (!function_exists('allpermissions')) {
+    function allpermissions()
+    {
+        return Permission::pluck("name")->toArray();
     }
 }
 ?>
