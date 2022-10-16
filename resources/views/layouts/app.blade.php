@@ -106,7 +106,7 @@
                             @endcan
                             @can("roles.index")
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('roles.list') }}">{{ __('application.menu.role_list')
+                                <a class="nav-link" href="{{ route('roles.index') }}">{{ __('application.menu.role_list')
                                     }}
                                 </a>
                             </li>
