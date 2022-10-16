@@ -88,6 +88,33 @@
                     </div>
                 </li>
                 @endif
+                @if (Auth::user()->hasAnyPermission(["roles.index","roles.create"]))
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-role-management" aria-expanded="false"
+                        aria-controls="ui-role-management">
+                        <i class="mdi mdi-account menu-icon"></i>
+                        <span class="menu-title">{{ __('application.menu.role') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-role-management">
+                        <ul class="nav flex-column sub-menu">
+                            @can("roles.create")
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('role.create') }}">{{ __('application.menu.add_role')
+                                    }}</a>
+                            </li>
+                            @endcan
+                            @can("roles.index")
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('role.list') }}">{{ __('application.menu.role_list')
+                                    }}
+                                </a>
+                            </li>
+                            @endcan
+                        </ul>
+                    </div>
+                </li>
+                @endif
                 @if (Auth::user()->hasAnyPermission(["places.create","places.create"]))
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#ui-place-management" aria-expanded="false"
