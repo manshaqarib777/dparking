@@ -100,13 +100,13 @@
                         <ul class="nav flex-column sub-menu">
                             @can("roles.create")
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('role.create') }}">{{ __('application.menu.add_role')
+                                <a class="nav-link" href="{{ route('roles.create') }}">{{ __('application.menu.add_role')
                                     }}</a>
                             </li>
                             @endcan
                             @can("roles.index")
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('role.list') }}">{{ __('application.menu.role_list')
+                                <a class="nav-link" href="{{ route('roles.list') }}">{{ __('application.menu.role_list')
                                     }}
                                 </a>
                             </li>
