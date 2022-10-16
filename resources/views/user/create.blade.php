@@ -7,7 +7,9 @@
             <div class="card">
                 <div class="card-header">
                     {{ __('application.user.add_user') }}
+                    @can("users.index")
                     <a class="btn btn-sm btn-primary pull-right" href="{{ route('user.list') }}">{{ __('application.user.user_list') }}</a>
+                    @endcan
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('user.store') }}" novalidate>
@@ -101,6 +103,36 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    @foreach ($sections as $section)
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h5>{{ $section->name }}</h5>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="checkbox" class="permission_checkbox" /> Select All
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                @foreach ($section->permissions as $permission)
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ str_replace('_', ' ', $permission->name)}}</label>
+                                                            <input type="checkbox" data-toggle="toggle" class="checkbox_package permission_assign" name="permissions[]" data-onstyle="primary" value="{{ $permission->id }}">
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group row mb-0 d-flex justify-content-end">
                             <div class="col-md-7 offset-md-3 d-flex justify-content-end">
                                 <button type="reset" class="btn btn-secondary me-2" id="frmClear">
@@ -130,5 +162,37 @@
             $('#place_div').removeClass('d-none');
         }
     }
+    $(document).ready(function() {
+        $(".permission_assign").click(function() {
+            var checked=true;
+            $(this).parent().parent().parent().parent().parent().find(".permission_assign").each(function() {
+                if ($(this).is(':checked')==false) {
+                    checked=false;
+                }
+            });
+            if(checked)
+            {
+                $(this).parent().parent().parent().parent().parent().find(".permission_checkbox").prop('checked', true);
+            }
+            else
+            {
+                $(this).parent().parent().parent().parent().parent().find(".permission_checkbox").prop('checked', false);
+            }
+    
+        });
+    
+        $(".permission_checkbox").click(function() {
+            if ($(this).is(':checked')) {
+                $(this).parent().parent().parent().find(".permission_assign").each(function() {
+                    $(this).prop('checked', true);
+                });
+    
+            } else {
+                $(this).parent().parent().parent().find(".permission_assign").each(function() {
+                    $(this).prop('checked', false);
+                });
+            }
+        });
+    });
 </script>
 @endpush

@@ -8,8 +8,10 @@
                 <div class="card">
                     <div class="card-header">
                         {{ __('application.slot.edit_slot') }}
+                        @can("slots.index")
                         <a class="btn btn-sm btn-primary pull-right"
                             href="{{ route('parking_settings.index') }}">{{ __('application.slot.slot_list') }}</a>
+                        @endcan
                     </div>
 
                     <div class="card-body">

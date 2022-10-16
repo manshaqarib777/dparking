@@ -99,6 +99,7 @@ class TariffController extends Controller
                 'place_id'          => $validated['place_id'],
                 'name'          => $validated['name'],
                 'category_id'   => $validated['category_id'],
+                'type'          => $validated['type'],
                 'start_date'    => $validated['start_date'],
                 'end_date'      => $validated['end_date'],                
                 'min_amount'    => $validated['min_amount'],                
@@ -161,6 +162,7 @@ class TariffController extends Controller
 
             $tariff = Tariff::where('id', $tariff->id)->update([
                 'place_id'      => $validated['place_id'],
+                'type'          => $validated['type'],
                 'name'          => $validated['name'],
                 'category_id'   => $validated['category_id'],
                 'start_date'    => $validated['start_date'],

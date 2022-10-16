@@ -7,7 +7,7 @@
 @section('content')
 <div class="container-fluid mb100">
     <div class="row customEqual">
-        <div class="col-sm-12 col-md-3 mb-2">
+        <div class="col-sm-12 col-md-4 mb-2">
             <div class="card">
                 <div class="card-header">
                     <h5>{{ __('application.parking.total_parking_space') }}</h5>
@@ -17,7 +17,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-12 col-md-3 mb-2">
+        <div class="col-sm-12 col-md-4 mb-2">
             <div class="card">
                 <div class="card-header">
                     <h5>{{ __('application.parking.total_booked') }}</h5>
@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-12 col-md-3 mb-2">
+        {{--  <div class="col-sm-12 col-md-3 mb-2">
             <div class="card">
                 <div class="card-header">
                     <h5>{{ __('application.parking.total_available') }}</h5>
@@ -36,7 +36,7 @@
                     <h1>{{ $total_slots - $currently_parking }}</h1>
                 </div>
             </div>
-        </div>
+        </div>  --}}
         <div class="col-md-3 col-sm-12 mb-2">
             <div class="card customEqualEl">
                 <div class="card-header">{{ __('application.parking.quick_checkout') }}</div>
@@ -127,6 +127,25 @@
                                             @if ($errors->has('category_id'))
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $errors->first('category_id') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group mb-1">
+                                            <label for="tariff_id"
+                                                class="col-md-4 col-form-label col-form-label text-md-right"><span
+                                                    class="tcr i-req">*</span>{{ __('application.parking.tariff')
+                                                }}</label>
+                                            <select name="tariff_id" id="tariff_id"
+                                                class="select2 form-control{{ $errors->has('tariff_id') ? ' is-invalid' : '' }}"
+                                                required>
+
+                                            </select>
+
+                                            @if ($errors->has('tariff_id'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('tariff_id') }}</strong>
                                             </span>
                                             @endif
                                         </div>
@@ -231,6 +250,7 @@
 @push('scripts')
 <script>
     var categories = @json($categories);
+    var tariffs = @json($tariffs);
 </script>
 <script src="{{ assetz('js/custom/settings/parking.js') }}"></script>
 @endpush

@@ -109,7 +109,7 @@
 					<h3 class="text-behance font-weight-bold">{{ $data['currently_parking'] }}</h3>
 				</div>
 			</div>
-			<div class="card mt-3">
+			{{--  <div class="card mt-3">
 				<div class="card-body dashboard-left-card d-flex flex-wrap justify-content-between">
 					<div>
 						<h4 class="font-weight-semibold mb-1 text-facebook"> {{
@@ -119,7 +119,7 @@
 					<h3 class="text-facebook font-weight-bold">{{ $data['total_slots'] - $data['currently_parking'] }}
 					</h3>
 				</div>
-			</div>
+			</div>  --}}
 		</div>
 		<div class="col-xl-8 stretch-card grid-margin">
 			<div class="card">

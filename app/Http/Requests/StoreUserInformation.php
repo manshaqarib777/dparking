@@ -42,6 +42,7 @@ class StoreUserInformation extends FormRequest
                 Rule::unique('users')->ignore($this->route('user'))
             ],
             'role'  => 'bail|required_if:required_role,true|integer',
+            'permissions'  => 'bail|required_if:required_permission,true',
             'password'        => 'bail|required_if:required_password,true|confirmed|max:191',
         ];
 

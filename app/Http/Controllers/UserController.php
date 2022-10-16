@@ -6,6 +6,7 @@ use App\User;
 use Exception;
 use App\Models\Place;
 
+use App\Models\Section;
 use App\Models\Language;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -87,6 +88,7 @@ class UserController extends Controller
     public function create()
     {
         $data['roles'] = Role::get();
+        $data['sections'] = Section::get();
         $data['languages'] = Language::where('status', '>=', 1)->where('code', '!=', 'master')->get();
         $data['places'] = Place::whereStatus(1)->get();
         return view('user.create', $data);
@@ -115,7 +117,8 @@ class UserController extends Controller
             }
 
             $user = User::create($data);
-            $user->roles()->attach($validated['role']);
+            $user->roles()->sync($validated['role']);
+            $user->permissions()->sync($validated['permissions']);
             $user->sendEmailVerificationNotification();
         } catch (\PDOException $e) {
             return redirect()
@@ -208,6 +211,7 @@ class UserController extends Controller
         $viewData = array(
             'user' => $user,
             'roles' => Role::get(),
+            'sections' => Section::get(),
             'places' => Place::whereStatus(1)->get(),
             'languages' => Language::where('status', '>=', 1)->where('code', '!=', 'master')->get()
         );
@@ -242,6 +246,7 @@ class UserController extends Controller
                 }
                 $user->update();
                 $user->roles()->sync($validated['role']);
+                $user->permissions()->sync($validated['permissions']);
             } catch (\PDOException $e) {
                 return redirect()
                     ->back()

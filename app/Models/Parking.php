@@ -23,6 +23,7 @@ class Parking extends Model
 				'amount',
 				'paid',
 				'status',
+				'tariff_id',
 				'created_by',
 				'modified_by'
 			];
@@ -51,6 +52,10 @@ class Parking extends Model
 	public function slot()
 	{
 		return $this->belongsTo('App\Models\CategoryWiseFloorSlot','slot_id');
+	}
+	public function tariff()
+	{
+		return $this->belongsTo('App\Models\Tariff','tariff_id');
 	}
 	
 	public function place()

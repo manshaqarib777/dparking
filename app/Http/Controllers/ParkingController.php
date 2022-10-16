@@ -17,6 +17,19 @@ use Illuminate\Support\Facades\Session;
 
 class ParkingController extends Controller
 {
+	public function __construct()
+    {
+        $this->middleware('permission:parkings.index', ['only' => ['index']]);
+        $this->middleware('permission:parkings.current', ['only' => ['currentList']]);
+        $this->middleware('permission:parkings.ended', ['only' => ['endedList']]);
+        $this->middleware('permission:parkings.print', ['only' => ['barcode']]);
+        $this->middleware('permission:parkings.pay', ['only' => ['pay']]);
+        $this->middleware('permission:parkings.create', ['only' => ['create']]);
+        $this->middleware('permission:parkings.store', ['only' => ['store']]);
+        $this->middleware('permission:parkings.edit', ['only' => ['edit']]);
+        $this->middleware('permission:parkings.update', ['only' => ['update']]);
+        $this->middleware('permission:parkings.delete', ['only' => ['destroy']]);
+    }
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -256,6 +269,7 @@ class ParkingController extends Controller
 	{
 		if (auth()->user()->hasAllPermissions(allpermissions())) {
 			$data['places'] = Place::where('status', 1)->get();
+			$data['tariffs'] = Tariff::where('status', 1)->get();
 			$data['categories'] = Category::where('status', 1)->get();
 			$data['currently_parking'] = Parking::where('out_time', NULL)->count();
 			$data['total_slots'] = CategoryWiseFloorSlot::where('category_wise_floor_slots.status', 1)
@@ -268,6 +282,7 @@ class ParkingController extends Controller
 		} else {
 			$place_id = auth()->user()->place_id;
 			$data['categories'] = Category::where(['status' => 1, 'place_id' => $place_id])->get();
+			$data['tariffs'] = Tariff::where('status', 1)->get();
 			$data['currently_parking'] = Parking::where('out_time', NULL)->where('place_id', $place_id)->count();
 			$data['total_slots'] = CategoryWiseFloorSlot::where('category_wise_floor_slots.status', 1)->where('place_id', $place_id)
 				->whereHas('floor', function ($query) {
@@ -294,6 +309,7 @@ class ParkingController extends Controller
 			$rfidVehicle = RfidVehicle::where('vehicle_no',$validated['vehicle_no'])->where('category_id',$validated['category_id'])->first();
 			$parking = Parking::create([
 				'place_id'    	=> auth()->user()->hasAllPermissions(allpermissions()) ? $validated['place_id'] : auth()->user()->place_id,
+				'tariff_id'    	=> $validated['tariff_id'],
 				'slot_id'    	=> $validated['slot_id'],
 				'vehicle_no'    => $validated['vehicle_no'],
 				'rfid_no'		=> (($rfidVehicle) ? $rfidVehicle->rfid_no : null),
@@ -385,6 +401,7 @@ class ParkingController extends Controller
 			$rfidVehicle = RfidVehicle::where('vehicle_no',$validated['vehicle_no'])->where('category_id',$validated['category_id'])->first();
 			$parking = Parking::where('id', $parking_crud->id)->update([
 				'place_id'    	=> auth()->user()->hasAllPermissions(allpermissions()) ? $validated['place_id'] : auth()->user()->place_id,
+				'tariff_id'    	=> $validated['tariff_id'],
 				'slot_id'    	=> $validated['slot_id'],
 				'vehicle_no'    => $validated['vehicle_no'],
 				'rfid_no'		=> (($rfidVehicle) ? $rfidVehicle->rfid_no : null),
@@ -432,7 +449,7 @@ class ParkingController extends Controller
 		$viewData = [];
 		if ($parking->status <= 2) {
 			try {
-				$tariff = Tariff::getCurrent($parking->category_id, $parking->place_id);
+				$tariff = $parking->tariff;
 				if ($tariff == NULL) {
 					return redirect()
 						->back()
@@ -440,24 +457,24 @@ class ParkingController extends Controller
 						->with(['flashMsg' => ['msg' => "Tariff not found for this hour. Please check your tariff information!", 'type' => 'warning']]);
 				}
 
-				$eDate = new \DateTime($parking->out_time);
-				dd($eDate);
-				Session::put('eDate_' . $parking->id, $eDate);
-				$dateDiff = $eDate->diff(new \DateTime($parking->in_time));
+				// $eDate = new \DateTime($parking->out_time);
+				
+				// Session::put('eDate_' . $parking->id, $eDate);
+				// $dateDiff = $eDate->diff(new \DateTime($parking->in_time));
 
 				// \Exceptio\Utlt::look($dateDiff);
-				$hour = $dateDiff->h;
-				$amt = $tariff->min_amount;
-				if ($dateDiff->days > 0)
-					$hour = $dateDiff->h + ($dateDiff->days * 24);
-				$hour += ($dateDiff->i / 60);
-				if ($hour > 1)
-					$amt = $hour * $tariff->amount;
+				$amt = $tariff->min_amount + $tariff->amount;
+				// $hour = $dateDiff->h;
+				// if ($dateDiff->days > 0)
+				// 	$hour = $dateDiff->h + ($dateDiff->days * 24);
+				// $hour += ($dateDiff->i / 60);
+				// if ($hour > 1)
+				// 	$amt = $hour * $tariff->amount;
 
-				Session::put('eAmt_' . $parking->id, $amt);
+				// Session::put('eAmt_' . $parking->id, $amt);
 				$viewData['parking'] = $parking;
 				$viewData['amt'] = $amt;
-				$viewData['amt'] = $tariff->min_amount > $amt ? $tariff->min_amount : $amt;
+				// $viewData['amt'] = $tariff->min_amount > $amt ? $tariff->min_amount : $amt;
 				return view('content.parking.end')->with($viewData);
 			} catch (Exception $e) {
 
@@ -495,24 +512,26 @@ class ParkingController extends Controller
 		if ($parking->status != 3) {
 			try {
 				$validated = $request->validated();
-				$parking->out_time = Session::has('eDate_' . $parking->id) ? Session::get('eDate_' . $parking->id) : date('Y-m-d H:i:s');
+				$parking->out_time = date('Y-m-d H:i:s');
 
+				$tariff = $parking->tariff;
+				$amt = $tariff->min_amount + $tariff->amount;
 
-				//amount 
-				if (Session::has('eAmt_' . $parking->id)) {
-					$amt = Session::get('eAmt_' . $parking->id);
-				} else {
-					$tariff = Tariff::getCurrent($parking->category_id, $parking->place_id);
-					$dateDiff = $parking->out_time->diff(new \DateTime($parking->in_time));
+				// //amount 
+				// if (Session::has('eAmt_' . $parking->id)) {
+				// 	$amt = Session::get('eAmt_' . $parking->id);
+				// } else {
+				// 	$tariff = Tariff::getCurrent($parking->category_id, $parking->place_id);
+				// 	$dateDiff = $parking->out_time->diff(new \DateTime($parking->in_time));
 
-					$hour = $dateDiff->h;
-					$amt = $tariff->min_amount;
-					if ($dateDiff->days > 0)
-						$hour = $dateDiff->h + ($dateDiff->days * 24);
-					$hour += ($dateDiff->i / 60);
-					if ($hour > 1)
-						$amt = $hour * $tariff->amount;
-				}
+				// 	$hour = $dateDiff->h;
+				// 	$amt = $tariff->min_amount;
+				// 	if ($dateDiff->days > 0)
+				// 		$hour = $dateDiff->h + ($dateDiff->days * 24);
+				// 	$hour += ($dateDiff->i / 60);
+				// 	if ($hour > 1)
+				// 		$amt = $hour * $tariff->amount;
+				// }
 
 				$parking->amount = $amt;
 				$parking->modified_by = $request->user()->id;
@@ -520,8 +539,8 @@ class ParkingController extends Controller
 				$parking->status = 4;
 				$parking->update();
 
-				Session::forget('eAmt_' . $parking->id);
-				Session::forget('eDate_' . $parking->id);
+				// Session::forget('eAmt_' . $parking->id);
+				// Session::forget('eDate_' . $parking->id);
 
 				$viewData['flashMsg'] = ['msg' => 'Parking checkout & payment successfully.', 'type' => 'success'];
 				$viewData['parking'] = $parking;

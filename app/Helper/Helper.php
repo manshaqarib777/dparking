@@ -52,4 +52,11 @@ if (!function_exists('allpermissions')) {
         return Permission::pluck("name")->toArray();
     }
 }
+if (!function_exists('getPeriods')) {
+    function getPeriods()
+    {
+        $options = [ "1" => "daily","7" => "weekly","14" => "biweekly", "31" => "monthly","366" => "yearly"];
+        return $options;
+    }
+}
 ?>

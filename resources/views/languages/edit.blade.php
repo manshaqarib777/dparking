@@ -22,9 +22,10 @@
                         @endif
                     </div>
                     <span class="font-weight-bold text-youtube">{{ __('application.language.all_the_fields_are_required')}} (*)</span>
-
+                    @can("languages.index")
                     <a class="btn btn-sm btn-primary pull-right" href="{{ route('languages.index') }}">{{
                         __('application.language.all_language_list') }}</a>
+                    @endcan
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('languages.update', ['language' => $language->id]) }}">
