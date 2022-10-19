@@ -25,7 +25,8 @@ class Parking extends Model
 				'status',
 				'tariff_id',
 				'created_by',
-				'modified_by'
+				'modified_by',
+				'agent_name'
 			];
 	protected $guarded = [];
 

@@ -143,6 +143,7 @@
 @push('scripts')
 <script>
     var floors = @json($floors);
+    var categories = @json($categories);
 </script>
 <script src="{{ asset('js/custom/settings/parking_setting.js') }}"></script>
 @endpush

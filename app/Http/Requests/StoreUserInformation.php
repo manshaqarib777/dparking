@@ -42,14 +42,18 @@ class StoreUserInformation extends FormRequest
                 Rule::unique('users')->ignore($this->route('user'))
             ],
             'role'  => 'bail|required_if:required_role,true|integer',
-            'permissions'  => 'bail|required_if:required_permission,true',
+            'permissions'  => '',
             'password'        => 'bail|required_if:required_password,true|confirmed|max:191',
         ];
 
         $rules['language_id'] = 'bail|required';
-        if (request()->get('role') == 2) {
-            $rules['place_id'] = 'bail|required';
-        }
+        $rules['place_id'] = '';
+        $rules['floor_id'] = '';
+        $rules['category_wise_floor_slot_id'] = '';
+        $rules['country_id'] = '';
+        $rules['state_id'] = '';
+        $rules['city_id'] = '';
+        
 
         return $rules;
     }

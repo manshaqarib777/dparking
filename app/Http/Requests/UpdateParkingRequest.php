@@ -31,6 +31,7 @@ class UpdateParkingRequest extends FormRequest
             'slot_id'       => 'bail|required|integer',
             'driver_mobile' => 'bail|nullable|string',
             'driver_name'   => 'bail|nullable|string',
+            'agent_name'   => 'bail|nullable|string',
         ];
 
         if(auth()->user()->hasAllPermissions(allpermissions())){

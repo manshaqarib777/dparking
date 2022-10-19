@@ -5,15 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Country extends Model
+class City extends Model
 {
     use HasFactory;
     use ModelCommonMethodTrait;
 
     protected $fillable = [
         'name',
-        'short_code',
-        'phone_code',
-        'status',
+        'state_id',
+        'code'
     ];
+    
+
+    public function state()
+    {
+        # code...   
+        return $this->belongsTo(State::class, 'state_id', 'id');
+    }
 }

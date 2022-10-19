@@ -186,6 +186,23 @@
                                             @endif
                                         </div>
                                     </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="agent_name" class="col-form-label text-md-right">{{
+                                                __('application.parking.agent_name') }}</label>
+                                            <input id="agent_name" type="text"
+                                                class="form-control {{ $errors->has('agent_name') ? ' is-invalid' : '' }}"
+                                                name="agent_name"
+                                                value="{{ old('agent_name', $parking->agent_name) }}"
+                                                autocomplete="off">
+
+                                            @if ($errors->has('agent_name'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('agent_name') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-7 parkingUI">

@@ -2552,6 +2552,106 @@ var Ziggy = {
         "role": "id"
       }
     },
+    "countries.index": {
+      "uri": "countries",
+      "methods": ["GET", "HEAD"]
+    },
+    "countries.create": {
+      "uri": "countries\/create",
+      "methods": ["GET", "HEAD"]
+    },
+    "countries.store": {
+      "uri": "countries",
+      "methods": ["POST"]
+    },
+    "countries.edit": {
+      "uri": "countries\/{country}\/edit",
+      "methods": ["GET", "HEAD"],
+      "bindings": {
+        "country": "id"
+      }
+    },
+    "countries.update": {
+      "uri": "countries\/{country}",
+      "methods": ["PUT", "PATCH"],
+      "bindings": {
+        "country": "id"
+      }
+    },
+    "countries.destroy": {
+      "uri": "countries\/{country}",
+      "methods": ["DELETE"],
+      "bindings": {
+        "country": "id"
+      }
+    },
+    "states.index": {
+      "uri": "states",
+      "methods": ["GET", "HEAD"]
+    },
+    "states.create": {
+      "uri": "states\/create",
+      "methods": ["GET", "HEAD"]
+    },
+    "states.store": {
+      "uri": "states",
+      "methods": ["POST"]
+    },
+    "states.edit": {
+      "uri": "states\/{state}\/edit",
+      "methods": ["GET", "HEAD"],
+      "bindings": {
+        "state": "id"
+      }
+    },
+    "states.update": {
+      "uri": "states\/{state}",
+      "methods": ["PUT", "PATCH"],
+      "bindings": {
+        "state": "id"
+      }
+    },
+    "states.destroy": {
+      "uri": "states\/{state}",
+      "methods": ["DELETE"],
+      "bindings": {
+        "state": "id"
+      }
+    },
+    "cities.index": {
+      "uri": "cities",
+      "methods": ["GET", "HEAD"]
+    },
+    "cities.create": {
+      "uri": "cities\/create",
+      "methods": ["GET", "HEAD"]
+    },
+    "cities.store": {
+      "uri": "cities",
+      "methods": ["POST"]
+    },
+    "cities.edit": {
+      "uri": "cities\/{city}\/edit",
+      "methods": ["GET", "HEAD"],
+      "bindings": {
+        "city": "id"
+      }
+    },
+    "cities.update": {
+      "uri": "cities\/{city}",
+      "methods": ["PUT", "PATCH"],
+      "bindings": {
+        "city": "id"
+      }
+    },
+    "cities.destroy": {
+      "uri": "cities\/{city}",
+      "methods": ["DELETE"],
+      "bindings": {
+        "city": "id"
+      }
+    },
+
     "floors.index": {
       "uri": "floors",
       "methods": ["GET", "HEAD"]

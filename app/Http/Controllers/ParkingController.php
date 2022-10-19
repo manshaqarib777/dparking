@@ -316,6 +316,7 @@ class ParkingController extends Controller
 				'category_id'   => $validated['category_id'],
 				'driver_name'   => $validated['driver_name'],
 				'driver_mobile' => $validated['driver_mobile'],
+				'agent_name' 	=> $validated['agent_name'],
 				'barcode'       => date('YmdHis') . $request->user()->id,
 				'in_time'       => date('Y-m-d H:i:s'),
 				'created_by'    => $request->user()->id,
@@ -408,6 +409,7 @@ class ParkingController extends Controller
 				'category_id'   => $validated['category_id'],
 				'driver_name'   => $validated['driver_name'],
 				'driver_mobile' => $validated['driver_mobile'],
+				'agent_name' 	=> $validated['agent_name'],
 				'status' 		=> 2,
 				'modified_by'   => $request->user()->id
 			]);

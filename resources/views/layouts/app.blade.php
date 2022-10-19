@@ -115,6 +115,87 @@
                     </div>
                 </li>
                 @endif
+                @if (Auth::user()->hasAnyPermission(["countries.index","countries.create"]))
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-country-management" aria-expanded="false"
+                        aria-controls="ui-country-management">
+                        <i class="mdi mdi-account menu-icon"></i>
+                        <span class="menu-title">{{ __('application.menu.country') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-country-management">
+                        <ul class="nav flex-column sub-menu">
+                            @can("countries.create")
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('countries.create') }}">{{ __('application.menu.add_country')
+                                    }}</a>
+                            </li>
+                            @endcan
+                            @can("countries.index")
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('countries.index') }}">{{ __('application.menu.country_list')
+                                    }}
+                                </a>
+                            </li>
+                            @endcan
+                        </ul>
+                    </div>
+                </li>
+                @endif
+                @if (Auth::user()->hasAnyPermission(["states.index","states.create"]))
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-state-management" aria-expanded="false"
+                        aria-controls="ui-state-management">
+                        <i class="mdi mdi-account menu-icon"></i>
+                        <span class="menu-title">{{ __('application.menu.state') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-state-management">
+                        <ul class="nav flex-column sub-menu">
+                            @can("states.create")
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('states.create') }}">{{ __('application.menu.add_state')
+                                    }}</a>
+                            </li>
+                            @endcan
+                            @can("states.index")
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('states.index') }}">{{ __('application.menu.state_list')
+                                    }}
+                                </a>
+                            </li>
+                            @endcan
+                        </ul>
+                    </div>
+                </li>
+                @endif
+                @if (Auth::user()->hasAnyPermission(["cities.index","cities.create"]))
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-city-management" aria-expanded="false"
+                        aria-controls="ui-city-management">
+                        <i class="mdi mdi-account menu-icon"></i>
+                        <span class="menu-title">{{ __('application.menu.city') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-city-management">
+                        <ul class="nav flex-column sub-menu">
+                            @can("cities.create")
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('cities.create') }}">{{ __('application.menu.add_city')
+                                    }}</a>
+                            </li>
+                            @endcan
+                            @can("cities.index")
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('cities.index') }}">{{ __('application.menu.city_list')
+                                    }}
+                                </a>
+                            </li>
+                            @endcan
+                        </ul>
+                    </div>
+                </li>
+                @endif
                 @if (Auth::user()->hasAnyPermission(["places.create","places.create"]))
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#ui-place-management" aria-expanded="false"

@@ -70,7 +70,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group row d-none" id="place_div">
+                        <div class="form-group row" id="place_div">
                             <label for="place_id" class="col-md-3 col-form-label text-md-right">{{ __('application.user.place') }}<span class="tcr i-req"></span></label>
                             <div class="col-md-9">                                
                                 <select id="place_id" name="place_id" class="form-control{{ $errors->has('place_id') ? ' is-invalid' : '' }}" required>       
@@ -81,6 +81,73 @@
                                 @if ($errors->has('place_id'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('place_id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="floor_id" class="col-md-3 col-form-label text-md-right">{{ __('application.user.floor') }}<span class="tcr i-req"></span></label>
+                            <div class="col-md-9">                                
+                                <select id="floor_id" name="floor_id" class="select2 form-control{{ $errors->has('category_id') ? ' is-invalid' : '' }}">       
+                                           
+                                </select>
+                                @if ($errors->has('floor_id'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('floor_id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="slot_id" class="col-md-3 col-form-label text-md-right">{{ __('application.user.slot') }}<span class="tcr i-req"></span></label>
+                            <div class="col-md-9">                                
+                                <select id="slot_id" name="category_wise_floor_slot_id" class="select2 form-control{{ $errors->has('category_id') ? ' is-invalid' : '' }}">       
+                                           
+                                </select>
+                                @if ($errors->has('slot_id'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('slot_id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group row" id="country_div">
+                            <label for="country_id" class="col-md-3 col-form-label text-md-right">{{ __('application.user.country') }}<span class="tcr i-req"></span></label>
+                            <div class="col-md-9">                                
+                                <select id="country_id" name="country_id" class="form-control{{ $errors->has('country_id') ? ' is-invalid' : '' }}" required>       
+                                    @foreach($countries as $country)                                    
+                                        <option value="{{$country->id}}" @if(old('country_id') == $country->id) {{ ' selected' }}  @endif>{{ucfirst($country->name)}}</option>
+                                    @endforeach                                    
+                                </select>
+                                @if ($errors->has('country_id'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('country_id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="state_id" class="col-md-3 col-form-label text-md-right">{{ __('application.user.state') }}<span class="tcr i-req"></span></label>
+                            <div class="col-md-9">                                
+                                <select id="state_id" name="state_id" class="select2 form-control{{ $errors->has('category_id') ? ' is-invalid' : '' }}">       
+                                           
+                                </select>
+                                @if ($errors->has('state_id'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('state_id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="city_id" class="col-md-3 col-form-label text-md-right">{{ __('application.user.city') }}<span class="tcr i-req"></span></label>
+                            <div class="col-md-9">                                
+                                <select id="city_id" name="city_id" class="select2 form-control{{ $errors->has('category_id') ? ' is-invalid' : '' }}">       
+                                           
+                                </select>
+                                @if ($errors->has('city_id'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('city_id') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -153,7 +220,23 @@
 
 @push('scripts')
 <script>
-    role_select();
+    var floors = @json($floors);
+    var slots = @json($slots);
+    var countries = @json($countries);
+    var states = @json($states);
+    var cities = @json($cities);
+
+
+    setTimeout(() => {
+        $('#place_id').trigger('change');
+        $('#country_id').trigger('change');
+
+        setTimeout(() => {
+            $('#floor_id').trigger('change');
+            $('#state_id').trigger('change');
+        }, 200);
+    }, 100);
+    {{--  role_select();
     function role_select(){
         if($('#role').val() == 1){
             $('#place_div').addClass('d-none');
@@ -161,7 +244,7 @@
         else{
             $('#place_div').removeClass('d-none');
         }
-    }
+    }  --}}
     $(document).ready(function() {
         $(".permission_assign").click(function() {
             var checked=true;
@@ -193,6 +276,51 @@
                 });
             }
         });
+    });
+
+    $(document).on('change', '#country_id', function(){
+        let state = states.filter(val => val.country_id == $(this).val());
+        var html = '';
+        $.each(state, function(ind,val){
+            html += `<option value="${val.id}">${val.name}</option>`;
+        });
+
+        $(document).find('#state_id').html(html);
+
+        $('#state_id').trigger('change');
+    });
+    $(document).on('change', '#state_id', function(){
+        let city = cities.filter(val => val.state_id == $(this).val());
+        var html = '';
+        $.each(city, function(ind,val){
+            html += `<option value="${val.id}">${val.name}</option>`;
+        });
+
+        $(document).find('#city_id').html(html);
+
+        $('#city_id').trigger('change');
+    });
+    $(document).on('change', '#place_id', function(){
+        let floor = floors.filter(val => val.place_id == $(this).val());
+        var html = '';
+        $.each(floor, function(ind,val){
+            html += `<option value="${val.id}">${val.name}</option>`;
+        });
+
+        $(document).find('#floor_id').html(html);
+
+        $('#floor_id').trigger('change');
+    });
+    $(document).on('change', '#floor_id', function(){
+        let slot = slots.filter(val => val.floor_id == $(this).val());
+        var html = '';
+        $.each(slot, function(ind,val){
+            html += `<option value="${val.id}">${val.slot_name}</option>`;
+        });
+
+        $(document).find('#slot_id').html(html);
+
+        $('#slot_id').trigger('change');
     });
 </script>
 @endpush

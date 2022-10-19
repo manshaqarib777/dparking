@@ -32,6 +32,7 @@ class StoreParkingRequest extends FormRequest
             'tariff_id'       => 'bail|required|integer',
 			'slot_id'   	=> 'bail|required|integer',
 			'driver_mobile' => 'bail|nullable|string',
+            'agent_name'   => 'bail|nullable|string',
 			'driver_name'   => 'bail|nullable|string',
 		];
 

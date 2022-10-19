@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\CategoryWiseFloorSlot;
 use App\Models\Language;
 use App\Models\ModelCommonMethodTrait;
 use Illuminate\Notifications\Notifiable;
@@ -20,7 +21,12 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'place_id', 'language_id'
+        'name', 'email', 'password', 'place_id', 'language_id',
+        'floor_id',
+        'category_wise_floor_slot_id',
+        'country_id',
+        'state_id',
+        'city_id'
     ];
 
     /**
@@ -63,6 +69,40 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(Language::class, 'language_id', 'id');
     }
     #end
+    public function place()
+    {
+        # code...   
+        return $this->belongsTo(Place::class, 'place_id', 'id');
+    }
 
+    public function floot()
+    {
+        # code...   
+        return $this->belongsTo(Floor::class, 'floot_id', 'id');
+    }
+
+    public function slot()
+    {
+        # code...   
+        return $this->belongsTo(CategoryWiseFloorSlot::class, 'category_wise_floor_slot_id', 'id');
+    }
+
+    public function country()
+    {
+        # code...   
+        return $this->belongsTo(Country::class, 'country_id', 'id');
+    }
+
+    public function state()
+    {
+        # code...   
+        return $this->belongsTo(State::class, 'state_id', 'id');
+    }
+
+    public function city()
+    {
+        # code...   
+        return $this->belongsTo(City::class, 'city_id', 'id');
+    }
 
 }

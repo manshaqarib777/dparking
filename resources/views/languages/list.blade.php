@@ -102,10 +102,10 @@
 
                                 $return = '';
                                 @can("languages.delete")    
-                                $return += '<button class="btn btn-sm btn-danger" onclick="deleteData(\'' + delURL + '\', \'#languageDataTable\')">Delete language</button>&nbsp;';
+                                $return += `<button class="btn btn-sm btn-danger" onclick="deleteData(\'' + delURL + '\', \'#languageDataTable\')">Delete language</button>&nbsp;`;
                                 @endcan
                                 @can("languages.config")    
-                                $return += '&nbsp;<a class="btn btn-sm btn-primary" href="${route('language.language_change', { 'language': data })}">Edit language</a>';
+                                $return += `&nbsp;<a class="btn btn-sm btn-primary" href="${route('language.language_change', { 'language': data })}">Edit language</a>`;
                                 @endcan
                                 @can("languages.edit")
                                 $return +=  `&nbsp;<a class="btn btn-sm btn-info" href="${route('languages.edit', { 'language': data })}">Config language</a>`;
