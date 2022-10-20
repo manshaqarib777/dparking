@@ -50,8 +50,9 @@ class CountryController extends Controller
             }
 
             if ($request->input('search') && $request->input('search')['value'] != "") {
-                $search['slot_name'] = $request->input('search')['value'];
-                $search['slotId'] = $request->input('search')['value'];
+                $search['name'] = $request->input('search')['value'];
+                $search['short_code'] = $request->input('search')['value'];
+                $search['phone_code'] = $request->input('search')['value'];
             }
 
             if ($request->input('where')) {
