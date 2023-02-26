@@ -116,7 +116,7 @@
                             <div class="col-md-9">                                
                                 <select id="country_id" name="country_id" class="form-control{{ $errors->has('country_id') ? ' is-invalid' : '' }}" required>       
                                     @foreach($countries as $country)                                    
-                                        <option value="{{$country->id}}" @if(old('country_id') == $country->id) {{ ' selected' }}  @endif>{{ucfirst($country->name)}}</option>
+                                        <option value="{{$country->id}}" {{ ( old('country_id')==$country->id ? ' selected' : ($country->default ? ' selected' : ''))  }}>{{ucfirst($country->name)}}</option>
                                     @endforeach                                    
                                 </select>
                                 @if ($errors->has('country_id'))

@@ -53,8 +53,14 @@ Route::middleware(['installed', 'auth', 'xss_clean', 'language'])->group(functio
     Route::post('general-settings', 'SiteController@storeGeneralSettings')->name('settings.store')->middleware("permission:settings.index");
     Route::resource('roles', 'RoleController')->except(['show']);
     Route::resource('countries', 'CountryController')->except(['show']);
+    Route::post('countries/default/{country}', 'CountryController@default')->name('user.default');
+
     Route::resource('states', 'StateController')->except(['show']);
+    Route::post('states/default/{state}', 'StateController@default')->name('state.default');
+
     Route::resource('cities', 'CityController')->except(['show']);
+    Route::post('cities/default/{city}', 'CityController@default')->name('city.default');
+
     Route::resource('floors', 'FloorController')->except(['show']);
     Route::get('floors/change-status/{floor}', 'FloorController@statusChange')->name('floors.status_changes');
     Route::resource('places', 'PlaceController')->except(['show']);

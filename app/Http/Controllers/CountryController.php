@@ -174,4 +174,11 @@ class CountryController extends Controller
     {
         $country->delete();
     }
+    public function default(Request $request, Country $country)
+    {
+        Country::query()->update(['default' => 0]);
+        $country->update(['default' => 1]);
+		return response()->json(['status' =>true,'message' => "Default Country successfully changed."]);
+
+    }
 }

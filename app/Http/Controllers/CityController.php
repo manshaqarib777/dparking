@@ -177,4 +177,12 @@ class CityController extends Controller
     {
         $city->delete();
     }
+
+    public function default(Request $request, City $city)
+    {
+        $cities = City::query()->update(['default' => 0]);
+        $city->update(['default' => 1]);
+		return response()->json(['status' =>true,'message' => "Default City successfully changed."]);
+
+    }
 }

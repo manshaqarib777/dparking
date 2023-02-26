@@ -75,6 +75,18 @@
                             data: "state.name",
                         },
                         {
+                            data: "default",
+                            class: "text-end width-5-per",
+                            render: function (data, type, row, col) {
+                                var $return =`<label class="checkbox">
+                                    <input type="checkbox" onchange="update_currency_status(this,${row.id})" class="form-control" ${(row.default == 1)? "checked":"" }>
+                                    <span></span>
+                                </label>`;
+                                
+                                return $return;
+                            },
+                        },
+                        {
                             data: "id",
                             class: "text-end width-5-per",
                             render: function (data, type, row, col) {
@@ -136,6 +148,13 @@
                 $('#state_id').trigger('change');
             });
         })(jQuery);
-        
+        function update_currency_status(el,id)
+        {
+
+            $.post('cities/default/'+id, {_token:'{{ csrf_token() }}'}, function(data) {
+                location.reload();
+            });
+
+        }
     </script>
 @endpush

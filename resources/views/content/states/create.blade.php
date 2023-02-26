@@ -41,8 +41,7 @@
                                         class="form-control {{ $errors->has('country_id') ? ' is-invalid' : '' }}"
                                         required>
                                         @foreach ($countries as $country)
-                                        <option value="{{ $country->id }}" {{ old('country_id')==$country->id ? ' selected' :
-                                            '' }}>
+                                        <option value="{{ $country->id }}" {{ ( old('country_id')==$country->id ? ' selected' : ($country->default ? ' selected' : ''))  }}>
                                             {{ $country->name }}
                                         </option>
                                         @endforeach

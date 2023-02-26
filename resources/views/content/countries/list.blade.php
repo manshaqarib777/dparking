@@ -39,9 +39,10 @@
             "use strict";
             var countryDataTableEl = null;
             let $return;
+            
             $(document).ready(function () {
                 
-        
+                
                 countryDataTableEl = $("#countryDatatable").DataTable({
                     dom: '<"row"<"col-12 col-sm-6"l><"col-12 col-sm-6"f>><"row"<"col-12 col-sm-12"t><"col-12 col-sm-6"i><"col-12 col-sm-6"p>>',
                     lengthMenu: [
@@ -73,6 +74,18 @@
                             class: "no-sort",
                             name: "phone_code",
                             data: "phone_code",
+                        },
+                        {
+                            data: "default",
+                            class: "text-end width-5-per",
+                            render: function (data, type, row, col) {
+                                var $return =`<label class="checkbox">
+                                    <input type="checkbox" onchange="update_currency_status(this,${row.id})" class="form-control" ${(row.default == 1)? "checked":"" }>
+                                    <span></span>
+                                </label>`;
+                                
+                                return $return;
+                            },
                         },
                         {
                             data: "id",
@@ -125,6 +138,13 @@
             });
         
         })(jQuery);
-        
+        function update_currency_status(el,id)
+        {
+
+            $.post('countries/default/'+id, {_token:'{{ csrf_token() }}'}, function(data) {
+                location.reload();
+            });
+
+        }
     </script>
 @endpush

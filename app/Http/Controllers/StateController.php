@@ -173,4 +173,11 @@ class StateController extends Controller
     {
         $state->delete();
     }
+    public function default(Request $request, State $state)
+    {
+        State::query()->update(['default' => 0]);
+        $state->update(['default' => 1]);
+		return response()->json(['status' =>true,'message' => "Default State successfully changed."]);
+
+    }
 }

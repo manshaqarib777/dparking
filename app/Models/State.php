@@ -11,6 +11,7 @@ class State extends Model
     use ModelCommonMethodTrait;
     protected $fillable = [
         'name',
+        'default',
         'code',
         'country_id',
         'status',
